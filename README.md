@@ -10,9 +10,21 @@ it looks the same on any machine with no other configuration required.
 
 ![macos-dark theme preview](labwc-blur-macos-dark-theme.png)
 
-*An active and an inactive window, the context menu and the window-switcher OSD.
-The close button is shown hovered, revealing its × glyph, and the window bodies
-show the background blur.*
+*A screenshot: an active and an inactive window, traffic lights coloured on the
+focused window and dimmed to grey on the other, with the window bodies showing
+the background blur.*
+
+## Preview
+
+![macos-dark theme preview](preview/theme-mockup.png)
+
+*The same theme rendered by `preview/render-preview.py`: an active and an
+inactive window, the context menu and the window-switcher OSD. The close button
+is shown hovered, revealing its × glyph. This one is generated from the theme's
+own files, so it cannot drift out of sync with them — see
+[Regenerating the mock-up](#regenerating-the-mock-up).*
+
+## Layout
 
 ```
 themes/macos-dark/labwc/
@@ -23,9 +35,11 @@ themes/macos-dark/labwc/
 ├── iconify-{active,inactive,hover-active}.svg
 ├── max-{active,inactive,hover-active}.svg
 └── max_toggled-{active,inactive,hover-active}.svg
-rc.xml.snippet              theme + blur + OSD/resize settings for rc.xml
-install.sh                  installer
-labwc-blur-macos-dark-theme.png
+rc.xml.snippet                    theme + blur + OSD/resize settings for rc.xml
+install.sh                        installer
+labwc-blur-macos-dark-theme.png   screenshot
+preview/render-preview.py         regenerates the mock-up above
+preview/theme-mockup.png
 ```
 
 The SVGs are 10px circles centred in a 20px button, with the hover glyph
@@ -200,6 +214,34 @@ ls -l ~/.config/labwc/themerc-override
 
 Since `themerc-override` is read after the theme, you only need to put the
 settings you want to change in it — everything else falls through to this theme.
+
+---
+
+## Regenerating the mock-up
+
+The image in the **Preview** section is produced by `preview/render-preview.py`,
+which reads the colours out of `themes/macos-dark/labwc/themerc`, takes the
+geometry and blur tuning from `rc.xml.snippet`, and rasterises the traffic lights
+straight from the theme's SVGs — so it tracks the theme rather than being kept in
+sync by hand. After changing a colour, re-run it:
+
+```sh
+python3 preview/render-preview.py
+```
+
+Options: `--width` (default 800) and `--out`.
+
+Needs `pillow`, `rsvg-convert` (librsvg) and the Inter font. If Inter lives
+somewhere unusual, point `FONT_PATH` at `InterVariable.ttf`.
+
+The mock-up is drawn in output pixels, so the blur radius is read at output
+resolution rather than native — that keeps the effect visible at README size
+instead of shrinking to a 3px haze. Window bodies show the blurred wallpaper
+because that is what a client asking for backdrop blur gets; the wallpaper itself
+is the one thing the script invents.
+
+The screenshot at the top of this file is a real capture and is **not** generated
+by this script.
 
 ---
 

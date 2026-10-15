@@ -3,3 +3,6 @@ rc.xml.bak.*
 
 # theme backups made by install.sh
 *.labwc.bak.*
+# python bytecode from preview/render-preview.py
+__pycache__/
+*.pyc
