@@ -1,0 +1,93 @@
+# macos-dark — a fixed macOS dark theme for labwc
+#
+# Self-contained: every colour the theme needs lives in this file. labwc reads
+# it from <data-dir>/themes/macos-dark/labwc/themerc, then (if present) layers
+# ~/.config/labwc/themerc-override on top, so any override you add still wins.
+#
+# Colours are hardcoded on purpose: a fixed macOS dark look, independent of any
+# dynamic palette tool that may be generating an override.
+
+# ---------------------------------------------------------------- geometry --
+border.width: 1
+
+# Compact macOS-like titlebar. 24px of content
+# (max(19px Inter 11 title, 20px traffic light) + 2*2px padding) + 1px border.
+# Raising the default font to 12pt makes it 28px, which is why the title is 11.
+window.titlebar.padding.width: 8
+window.titlebar.padding.height: 2
+
+# 20x20 hit area with zero spacing centres the lights 20px apart, so the 10px
+# circle inside each button leaves a macOS-like 10px gap.
+window.button.width: 20
+window.button.height: 20
+window.button.spacing: 0
+
+# Circular hover halo behind the titlebar buttons (macOS style), diameter
+# matching the button.
+window.button.hover.bg.color: #ffffff26
+window.button.hover.bg.corner-radius: 10
+
+# macOS-style soft shadows.
+window.active.shadow.size: 60
+window.inactive.shadow.size: 40
+window.active.shadow.color: #00000060
+window.inactive.shadow.color: #00000040
+
+# ------------------------------------------------------------------- frame --
+# 1px border in the exact titlebar colour, so border and titlebar read as one
+# continuous edge instead of a darker outline.
+window.active.border.color: #2e2e32
+window.inactive.border.color: #28282c
+
+# ---------------------------------------------------------------- titlebar --
+window.active.title.bg: flat
+window.inactive.title.bg: flat
+window.active.title.bg.color: #2e2e32
+window.inactive.title.bg.color: #28282c
+window.active.label.text.color: #f5f5f7
+window.inactive.label.text.color: #98989d
+window.label.text.justify: center
+
+# ---------------------------------------------------- titlebar button colors --
+# Fallback tints only. The theme ships real assets —
+# close/iconify/max[_toggled]-{active,inactive}.svg plus the _hover-active
+# variants — and those render the coloured circles and the hover glyphs
+# (dash, cross, diagonal arrows) directly. These values only take effect if an
+# SVG is missing, in which case labwc tints its built-in bitmap glyphs with
+# them, so the lights still come out red/green/yellow.
+#
+# Traffic lights: close=red, minimize=green, maximize=yellow, right-aligned.
+window.active.button.unpressed.image.color: #f5f5f7
+window.active.button.close.unpressed.image.color: #ff5f57
+window.active.button.iconify.unpressed.image.color: #28c840
+window.active.button.max.unpressed.image.color: #febc2e
+# Inactive windows: traffic lights dim to grey, like macOS unfocused windows.
+window.inactive.button.unpressed.image.color: #636366
+#
+# Note: labwc parses only the "unpressed" state for these keys. There are no
+# window.<active|inactive>.button.<name>.hover.image.color or .pressed.
+# image.color settings — they are silently ignored. Hover and press colouring
+# comes from the _hover-active.svg assets instead.
+
+# -------------------------------------------------------------------- menu --
+menu.overlap.x: 4
+menu.overlap.y: 0
+menu.width.min: 180
+menu.width.max: 320
+menu.items.padding.x: 10
+menu.items.padding.y: 5
+menu.border.width: 1
+menu.border.color: #000000
+menu.items.bg.color: #36363a
+menu.items.text.color: #f5f5f7
+menu.items.active.bg.color: #0a6cff
+menu.items.active.text.color: #ffffff
+menu.separator.color: #48484a
+menu.title.bg.color: #36363a
+menu.title.text.color: #f5f5f7
+
+# ------------------------------------------- on screen display / switcher --
+osd.bg.color: #2c2c2e
+osd.border.color: #48484a
+osd.label.text.color: #f5f5f7
+osd.window-switcher.preview.border.color: #0a6cff

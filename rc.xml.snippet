@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<!--
+  macos-dark — appearance settings for labwc.
+
+  This is a *fragment*, not a whole rc.xml. Paste the blocks below into your
+  existing ~/.config/labwc/rc.xml (merge them; do not replace the file) so you
+  keep your own keybinds, desktops, monitor assignment and other local setup.
+
+  Only appearance lives here: theme, blur, OSD and resize feel. Nothing
+  machine-specific is included.
+-->
+<labwc_config>
+
+  <!--
+    Blur behind windows that request it (ext-background-effect-v1).
+
+    Requires a labwc built against scenefx with the ext-background-effect
+    extension (the stock Arch/CachyOS labwc package does NOT support this; the
+    settings are simply ignored elsewhere). Clients opt in themselves — GTK4/Qt
+    via their background-effect APIs, or any client speaking
+    ext-background-effect-v1 directly.
+
+    These are the tuned values, slightly stronger than the built-in defaults
+    (passes=3, radius=5, strength=1.0). Delete the whole block to go back to
+    the defaults.
+  -->
+  <blur>
+    <passes>4</passes>
+    <radius>7</radius>
+    <noise>0.02</noise>
+    <brightness>0.9</brightness>
+    <contrast>0.9</contrast>
+    <saturation>1.1</saturation>
+    <strength>1.0</strength>
+  </blur>
+
+  <!-- OSD shown by the window switcher, coloured by the theme's osd.* keys. -->
+  <windowSwitcher>
+    <osd show="yes" style="thumbnail" />
+  </windowSwitcher>
+
+  <!-- Small grab area at corners, generous corner range: macOS-like resizing. -->
+  <resize>
+    <minimumArea>16</minimumArea>
+    <cornerRange>20</cornerRange>
+  </resize>
+
+  <theme>
+    <name>macos-dark</name>
+    <!--
+      macOS: traffic lights on the right (minimize, maximize, close) with the
+      title centred. The left section of the layout is intentionally empty —
+      that leading ':' is what leaves it blank.
+    -->
+    <titlebar>
+      <layout>:iconify,max,close</layout>
+      <showTitle>yes</showTitle>
+    </titlebar>
+    <cornerRadius>12</cornerRadius>
+    <!--
+      SF Pro-like UI font: Inter everywhere, semibold active titles, medium
+      inactive/OSD so text keeps stem weight on the dark titlebar.
+
+      Requires the Inter font to be installed, otherwise labwc falls back to a
+      generic sans.
+
+      Title = 11pt (not 10): at 10pt the glyphs are only 17px tall and the AA
+      is visibly soft; 11pt -> 19px reads much crisper and still keeps the
+      titlebar at 24px, because the 20px traffic lights are what set the
+      height — up to 12pt costs nothing extra.
+    -->
+    <font name="Inter" size="12"/>
+    <font place="ActiveWindow">
+      <name>Inter</name>
+      <size>11</size>
+      <weight>semibold</weight>
+    </font>
+    <font place="InactiveWindow">
+      <name>Inter</name>
+      <size>11</size>
+      <weight>medium</weight>
+    </font>
+    <font place="MenuItem">
+      <name>Inter</name>
+      <size>12</size>
+      <weight>normal</weight>
+    </font>
+    <font place="MenuHeader">
+      <name>Inter</name>
+      <size>12</size>
+      <weight>medium</weight>
+    </font>
+    <font place="OnScreenDisplay">
+      <name>Inter</name>
+      <size>11</size>
+      <weight>medium</weight>
+    </font>
+    <dropShadows>yes</dropShadows>
+    <!--
+      Off: with dropShadows enabled labwc keeps a 1px border for the shadow to
+      render into. This theme paints the border in the titlebar colour instead,
+      so the frame reads as one continuous edge.
+    -->
+    <keepBorder>no</keepBorder>
+  </theme>
+
+</labwc_config>

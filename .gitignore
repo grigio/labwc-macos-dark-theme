@@ -1,0 +1,5 @@
+# rc.xml backups made by install.sh
+rc.xml.bak.*
+
+# theme backups made by install.sh
+*.labwc.bak.*
